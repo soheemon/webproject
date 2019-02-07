@@ -46,9 +46,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				<!-- 반복할 부분 -->
+				<%@include file="detail.jsp"%>
 				<tr>
 					<td>1</td>
-					<td>테스트입니다.</td>
+					<td> 
+						<a href="#" data-toggle="modal" data-target="#detailModal"> 테스트입니다. </a>
+					</td>
 					<td>soheemon</td>
 					<td>2018.02.07</td>
 				</tr>

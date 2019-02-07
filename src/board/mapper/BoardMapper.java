@@ -8,7 +8,14 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import board.model.BoardVo;
-
+//CREATE TABLE TBL_BOARD(
+//SEQ NUMBER,
+//WRITER VARCHAR2(30),
+//CONTENTS VARCHAR2(200),
+//REGDATE DATE
+//);
+//
+//CREATE SEQUENCE BOARD_SEQ;
 public interface BoardMapper {
 
 	@Insert("INSERT INTO tbl_board VALUES(board_seq.nextval, #{writer},#{contents},sysdate)")

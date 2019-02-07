@@ -2,22 +2,27 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import board.model.BoardVo;
+import sun.util.logging.resources.logging;
 import board.model.BoardDao;
 
 public class boardMapperTest {
-	
+
 	BoardDao dao;
+
 	@Before
 	public void testInit() {
 		dao = BoardDao.getInstance();
 	}
-	
-	//새글등록
+
+	// 새글등록
+	@Ignore
 	@Test
 	public void testInsertBoard() {
 		BoardVo board = new BoardVo();
@@ -25,20 +30,25 @@ public class boardMapperTest {
 		board.setWriter("soheemon");
 		dao.insertBoard(board);
 	}
-	
-	//글삭제
+
+	// 글삭제
 	@Test
 	public void testDeleteBoard() {
-		dao.deleteBoard(1);
+		if (dao.deleteBoard(1) < 0) {
+			fail();
+		}
 	}
-	
-	//글 디테일 확인
+
+	// 글 디테일 확인
+	@Ignore
 	@Test
 	public void testDetailBoard() {
-		dao.detailBoard(1);
+		BoardVo board = dao.detailBoard(1);
+		assertNotNull(board);
 	}
-	
-	//글 수정
+
+	// 글 수정
+	@Ignore
 	@Test
 	public void testUpdateBoard() {
 		BoardVo board = new BoardVo();
@@ -46,10 +56,16 @@ public class boardMapperTest {
 		board.setWriter("modified writer");
 		dao.boardUpdate(board);
 	}
-	
-	//글 리스트 가져오기
+
+	// 글 리스트 가져오기
+	@Ignore
 	@Test
 	public void testListBoard() {
-		dao.listBoard();
+		List<BoardVo> list = dao.listBoard();
+		assertNotNull(list);
+
+		for (BoardVo board : list) {
+			System.out.println(board);
+		}
 	}
 }
