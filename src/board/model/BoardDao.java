@@ -31,7 +31,7 @@ public class BoardDao {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 
-	public int insertBoard(Board board) {
+	public int insertBoard(BoardVo board) {
 		int queryResult = -1;
 		SqlSession sqlSession = null;
 		sqlSession = getSqlSessionFactory().openSession();
@@ -71,8 +71,8 @@ public class BoardDao {
 		return queryResult;
 	}
 
-	public List<Board> listBoard() {
-		List<Board> list = null;
+	public List<BoardVo> listBoard() {
+		List<BoardVo> list = null;
 		SqlSession sqlSession = null;
 		sqlSession = getSqlSessionFactory().openSession();
 
@@ -85,8 +85,8 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board detailBoard(int seq) {
-		Board board = null;
+	public BoardVo detailBoard(int seq) {
+		BoardVo board = null;
 		SqlSession sqlSession = null;
 		sqlSession = getSqlSessionFactory().openSession();
 
@@ -99,7 +99,7 @@ public class BoardDao {
 		return board;
 	}
 
-	public int boardUpdate(Board board) {
+	public int boardUpdate(BoardVo board) {
 		int queryResult = -1;
 		SqlSession sqlSession = null;
 		sqlSession = getSqlSessionFactory().openSession();

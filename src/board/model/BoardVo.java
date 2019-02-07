@@ -1,14 +1,14 @@
 package board.model;
 
-public class Board {
+public class BoardVo {
 	int seq;
 	String writer,
 			contents,
 			regdate;
 	
-	public Board(){};
+	public BoardVo(){};
 	
-	public Board(int seq, String writer, String contents, String regdate) {
+	public BoardVo(int seq, String writer, String contents, String regdate) {
 		super();
 		this.seq = seq;
 		this.writer = writer;

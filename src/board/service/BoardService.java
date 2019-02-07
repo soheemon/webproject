@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.Board;
+import board.model.BoardVo;
 import board.model.BoardDao;
 
 
@@ -19,14 +19,14 @@ public class BoardService {
 	private BoardService(){};
 	
 	public void BoardInsertService(HttpServletRequest request, HttpServletResponse response){
-		Board newBoard = new Board();
+		BoardVo newBoard = new BoardVo();
 		//newBoard.setSeq(Integer.parseInt(request.getParameter("seq")));
 		newBoard.setWriter(request.getParameter("writer"));
 		newBoard.setContents(request.getParameter("contents"));
 		dao.insertBoard(newBoard);
 	}
 	public void ListBoardService(HttpServletRequest request, HttpServletResponse response){
-		List<Board> list = dao.listBoard();
+		List<BoardVo> list = dao.listBoard();
 //		for(Board tmp: list){
 //			System.out.println(tmp);
 //		}
@@ -35,7 +35,7 @@ public class BoardService {
 	
 	public void DetilBoardService(HttpServletRequest request, HttpServletResponse response){
 		int seq = Integer.parseInt(request.getParameter("seq"));
-		Board boardDetail = dao.detailBoard(seq);
+		BoardVo boardDetail = dao.detailBoard(seq);
 
 		request.setAttribute("boardDetail", boardDetail);
 	}
@@ -48,7 +48,7 @@ public class BoardService {
 //		}
 	}
 	public void BoardUpdateService(HttpServletRequest request, HttpServletResponse response){
-		Board updateBoard = new Board();
+		BoardVo updateBoard = new BoardVo();
 		updateBoard.setWriter(request.getParameter("writer"));
 		updateBoard.setContents(request.getParameter("contents"));
 		updateBoard.setSeq(Integer.parseInt(request.getParameter("seq"))); 
