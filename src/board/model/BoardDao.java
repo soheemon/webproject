@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import board.mapper.BoardMapper;
+
 public class BoardDao {
 
 	public static BoardDao dao = new BoardDao();

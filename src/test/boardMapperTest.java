@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import board.model.BoardVo;
@@ -34,18 +35,21 @@ public class boardMapperTest {
 	//글 디테일 확인
 	@Test
 	public void testDetailBoard() {
-		
+		dao.detailBoard(1);
 	}
 	
 	//글 수정
 	@Test
 	public void testUpdateBoard() {
-		
+		BoardVo board = new BoardVo();
+		board.setContents("modified contents");
+		board.setWriter("modified writer");
+		dao.boardUpdate(board);
 	}
 	
 	//글 리스트 가져오기
 	@Test
 	public void testListBoard() {
-		
+		dao.listBoard();
 	}
 }

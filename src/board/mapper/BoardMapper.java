@@ -11,19 +11,19 @@ import board.model.BoardVo;
 
 public interface BoardMapper {
 
-	@Insert("INSERT INTO sh_board VALUES(sh_board_seq.nextval, #{writer},#{contents},sysdate)")
+	@Insert("INSERT INTO tbl_board VALUES(board_seq.nextval, #{writer},#{contents},sysdate)")
 	int insertBoard(BoardVo board);
 
-	@Select("SELECT * FROM sh_board order by seq desc")
+	@Select("SELECT * FROM tbl_board order by seq desc")
 	List<BoardVo> listBoard();
 
-	@Delete("DELETE FROM sh_board WHERE seq = #{seq}")
+	@Delete("DELETE FROM tbl_board WHERE seq = #{seq}")
 	int deleteBoard(int seq);
 
-	@Select("SELECT * FROM sh_board where seq = #{seq}")
+	@Select("SELECT * FROM tbl_board where seq = #{seq}")
 	BoardVo detailBoard(int seq);
 
-	@Update("UPDATE SH_BOARD SET writer = #{writer}, contents = #{contents}, regdate = sysdate WHERE seq = #{seq}")
+	@Update("UPDATE tbl_board SET writer = #{writer}, contents = #{contents}, regdate = sysdate WHERE seq = #{seq}")
 	int updateBoard(BoardVo board);
 
 }
