@@ -22,16 +22,19 @@ public class boardMapperTest {
 	}
 
 	// 새글등록
-	@Ignore
+
 	@Test
 	public void testInsertBoard() {
 		BoardVo board = new BoardVo();
 		board.setContents("contents");
 		board.setWriter("soheemon");
-		dao.insertBoard(board);
+		for (int index = 0; index < 10; index++) {
+			dao.insertBoard(board);
+		}
 	}
 
 	// 글삭제
+	@Ignore
 	@Test
 	public void testDeleteBoard() {
 		if (dao.deleteBoard(1) < 0) {

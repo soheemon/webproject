@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.action.ActionForward;
+import board.service.BoardService;
 
 public class BoardRedirectAction implements Action {
 
@@ -17,7 +18,7 @@ public class BoardRedirectAction implements Action {
 		service.ListBoardService(request, response);
 		
 		forward.setRedirect(false);
-		forward.setNextPath("Boardlist.jsp");
+		forward.setNextPath("list.jsp");
 		return forward;
 	}
 

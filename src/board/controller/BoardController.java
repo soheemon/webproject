@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.action.Action;
 import board.action.ActionForward;
+import board.action.BoardRedirectAction;
+import board.service.BoardService;
 
 
 @WebServlet("*.do")
@@ -51,19 +53,21 @@ public class BoardController extends HttpServlet {
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	request.setCharacterEncoding("utf-8");
     	String ReqUri = getReqUri(request);
-    	ActionForward forward = null;
-    	Action action = null;
+    	
+    	BoardService service = BoardService.getInstance();
     	switch (ReqUri) {
-		case "Redirect.do":
-//			action = (Action)new BoardRedirectAction();
-//			forward = ((BoardRedirectAction) action).execute(request, response);
-			System.out.println("redirect!");
+		case "BoardInsert.do":
+			System.out.println("BoardInsert");
 			break;
-
+		case "BoardList.do":
+			System.out.println("BoardList");
+			service.ListBoardService(request, response);
+			break;
 		default:
 			break;
 		}
-    	doForward(request, response, forward);
+    	
+    	//doForward(request, response, forward);
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,7 +11,6 @@
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <!-- 부트스트랩 -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -24,7 +23,35 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="BoardModule.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				//console.log(boardService);
 
+				boardService.getList(function(data) {
+					var boardList = JSON.parse(data);
+
+					var tbody = document.getElementsByTagName("tbody")[0];
+			
+					boardList.forEach(function(board) {
+						var boardMarkdown = 
+							'<tr>' + 
+								'<td>' + board.seq + '</td>' + 
+								'<td>' + 
+								'<a href="#" data-toggle="modal" data-target="#detailModal">' +
+									'defaultTitle' + 
+								'</a>' +
+								'</td>' + 
+								'<td>' + board.writer + '</td>' + 
+								'<td>' + board.regdate + '</td>' + 
+							'</tr>';
+							
+						$('tbody').append(boardMarkdown);
+					});
+				});
+			});
+</script>
 </head>
 <body>
 
@@ -50,9 +77,8 @@
 				<%@include file="detail.jsp"%>
 				<tr>
 					<td>1</td>
-					<td> 
-						<a href="#" data-toggle="modal" data-target="#detailModal"> 테스트입니다. </a>
-					</td>
+					<td><a href="#" data-toggle="modal" data-target="#detailModal">
+							테스트입니다. </a></td>
 					<td>soheemon</td>
 					<td>2018.02.07</td>
 				</tr>
