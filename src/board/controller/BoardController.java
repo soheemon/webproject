@@ -58,6 +58,7 @@ public class BoardController extends HttpServlet {
     	switch (ReqUri) {
 		case "BoardInsert.do":
 			System.out.println("BoardInsert");
+			service.BoardInsertService(request, response);
 			break;
 		case "BoardList.do":
 			System.out.println("BoardList");

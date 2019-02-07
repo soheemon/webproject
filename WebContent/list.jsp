@@ -25,30 +25,31 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="BoardModule.js"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				//console.log(boardService);
+$(function(){
+	printBoardList();
+});
+	function printBoardList() {
+		boardService.getList(function(data) {
+			var boardList = JSON.parse(data);
 
-				boardService.getList(function(data) {
-					var boardList = JSON.parse(data);
-
-					var tbody = document.getElementsByTagName("tbody")[0];
+			var tbody = document.getElementsByTagName("tbody")[0];
+			$('tbody').empty();//중복방지를 위해 비우고 시작
 			
-					boardList.forEach(function(board) {
-						var boardMarkdown = 
-							'<tr data-toggle="modal" data-target="#detailModal"' + 'id=' + board.seq +'>' + 
-								'<td>' + board.seq + '</td>' + 
-								'<td>' + 
-									'defaultTitle' + 			
-								'</td>' + 
-								'<td>' + board.writer + '</td>' + 
-								'<td>' + board.regdate + '</td>' + 
-							'</tr>';
-							
-						$('tbody').append(boardMarkdown);
-					});
-				});
+			boardList.forEach(function(board) {
+				var boardMarkdown = 
+					'<tr data-toggle="modal" data-target="#detailModal"' + 'id=' + board.seq +'>' + 
+						'<td>' + board.seq + '</td>' + 
+						'<td>' + 
+							'defaultTitle' + 			
+						'</td>' + 
+						'<td>' + board.writer + '</td>' + 
+						'<td>' + board.regdate + '</td>' + 
+					'</tr>';
+					
+				$('tbody').append(boardMarkdown);
 			});
+		});
+	}
 </script>
 </head>
 <body>
@@ -71,14 +72,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- 반복할 부분 -->
+				<!-- 글목록 추가 -->
 				<%@include file="detail.jsp"%>
-				<tr data-toggle="modal" data-target="#detailModal" id="5">
-					<td>1</td>
-					<td>테스트입니다.</td>
-					<td>soheemon</td>
-					<td>2018.02.07</td>
-				</tr>
+
 			</tbody>
 		</table>
 		<!-- 글등록 Modal -->

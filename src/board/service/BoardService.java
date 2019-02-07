@@ -10,6 +10,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import board.model.BoardVo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,14 +27,15 @@ public class BoardService {
 		return service;
 	}
 
-	private BoardService() {
-	};
+	private BoardService() {};
 
 	public void BoardInsertService(HttpServletRequest request, HttpServletResponse response) {
+	
 		BoardVo newBoard = new BoardVo();
-		// newBoard.setSeq(Integer.parseInt(request.getParameter("seq")));
-		newBoard.setWriter(request.getParameter("writer"));
-		newBoard.setContents(request.getParameter("contents"));
+		org.json.simple.JSONObject jsonObj = getRequest(request,response);
+		System.out.println(jsonObj);
+		newBoard.setWriter((String) jsonObj.get("writer"));
+		newBoard.setContents((String) jsonObj.get("contents"));
 		dao.insertBoard(newBoard);
 	}
 
@@ -76,20 +80,7 @@ public class BoardService {
 		dao.boardUpdate(updateBoard);
 	}
 
-	public static String getBody(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// String requestBody = getBody(request, response);
-		// JSONParser jsonParser = new JSONParser();
-		// JSONObject jsonData = (JSONObject) jsonParser.parse(requestBody);
-		//
-		// String desContents = (String)jsonData.get("desContents");
-		// DescriptionDTO description = new DescriptionDTO();
-		// //설명내용 받아와 셋팅
-		// description.setD_contents(desContents);
-		// //훗날 수정필요 >> 포스트 넘버 받아와 셋팅
-		// description.setP_no(1);
-		// PostDao dao = PostDao.getInstance();
-		//
-		// dao.insertDescription(description);
+	public static org.json.simple.JSONObject getRequest(HttpServletRequest request, HttpServletResponse response) {
 
 		String body = "";
 		StringBuilder stringBuilder = new StringBuilder();
@@ -114,12 +105,21 @@ public class BoardService {
 				try {
 					bufferedReader.close();
 				} catch (Exception e2) {
-					throw e2;
+					e2.printStackTrace();
 				}
 			}
 		}
 		body = stringBuilder.toString();
-		return body;
+		
+		JSONParser jsonParser = new JSONParser();
+		org.json.simple.JSONObject jsonData = null;
+		try {
+			jsonData = (org.json.simple.JSONObject) jsonParser.parse(body);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}		
+		return jsonData;
 	}
 	
 	public void sendResponse(HttpServletResponse response, JSONArray jsonarr) {

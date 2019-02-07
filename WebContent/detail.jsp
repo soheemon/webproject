@@ -8,13 +8,13 @@
 <script type="text/javascript">
 $(function(){
 	$('#detailModal').on('show.bs.modal', function(event) {
-		//console.log(test);
+		
 		var modal = $(this);
+		
 		var tr = $(event.relatedTarget); // Button that triggered the modal
 		var seq = tr.context.getAttribute('id');
 		boardService.detailBoard(seq, function(data){
 			var board = JSON.parse(data);
-			console.log(board);
 			modal.find('#boardWriter').text(board.writer);
 			modal.find('#boardTitle').text('here!');
 			modal.find('#boardContents').text(board.contents);
@@ -44,13 +44,13 @@ $(function(){
 			<div class="modal-body">
 				<div class="board-body">
 					<h5>작성자</h5>
-					<p class="board-body" id="boardWriter">soheemon</p>
+					<p class="board-body" id="boardWriter"></p>
 					<hr>
 					<h5>제목</h5>
-					<p class="board-body" id="boardTitle">안녕하세요</p>
+					<p class="board-body" id="boardTitle"></p>
 					<hr>
 					<h5>내용</h5>
-					<p class="board-body" id="boardContents">반갑습니다.</p>
+					<p class="board-body" id="boardContents"></p>
 				</div>
 			</div>
 			<!-- buttons -->
