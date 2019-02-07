@@ -6,15 +6,23 @@
 <!-- show 될때 ajax요청 보내야 합니다. detailboard요청. -->
 
 <script type="text/javascript">
+$(function(){
 	$('#detailModal').on('show.bs.modal', function(event) {
-		var button = $(event.relatedTarget) // Button that triggered the modal
-		var recipient = button.data('whatever') // Extract info from data-* attributes
-		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		var modal = $(this)
-		modal.find('.modal-title').text('New message to ' + recipient)
-		modal.find('.modal-body input').val(recipient)
-	})
+		//console.log(test);
+		var modal = $(this);
+		var tr = $(event.relatedTarget); // Button that triggered the modal
+		var seq = tr.context.getAttribute('id');
+		boardService.detailBoard(seq, function(data){
+			var board = JSON.parse(data);
+			console.log(board);
+			modal.find('#boardWriter').text(board.writer);
+			modal.find('#boardTitle').text('here!');
+			modal.find('#boardContents').text(board.contents);
+		});
+
+	});
+})
+
 </script>
 
 <!-- Modal -->

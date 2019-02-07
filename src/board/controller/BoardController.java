@@ -63,6 +63,10 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardList");
 			service.ListBoardService(request, response);
 			break;
+		case "BoardDetail.do":
+			System.out.println("BoardDetail");
+			service.DetailBoardService(request, response);
+			break;
 		default:
 			break;
 		}

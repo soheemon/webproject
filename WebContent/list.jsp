@@ -36,12 +36,10 @@
 			
 					boardList.forEach(function(board) {
 						var boardMarkdown = 
-							'<tr>' + 
+							'<tr data-toggle="modal" data-target="#detailModal"' + 'id=' + board.seq +'>' + 
 								'<td>' + board.seq + '</td>' + 
 								'<td>' + 
-								'<a href="#" data-toggle="modal" data-target="#detailModal">' +
-									'defaultTitle' + 
-								'</a>' +
+									'defaultTitle' + 			
 								'</td>' + 
 								'<td>' + board.writer + '</td>' + 
 								'<td>' + board.regdate + '</td>' + 
@@ -75,10 +73,9 @@
 			<tbody>
 				<!-- 반복할 부분 -->
 				<%@include file="detail.jsp"%>
-				<tr>
+				<tr data-toggle="modal" data-target="#detailModal" id="5">
 					<td>1</td>
-					<td><a href="#" data-toggle="modal" data-target="#detailModal">
-							테스트입니다. </a></td>
+					<td>테스트입니다.</td>
 					<td>soheemon</td>
 					<td>2018.02.07</td>
 				</tr>

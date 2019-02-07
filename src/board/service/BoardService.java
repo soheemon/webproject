@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.BoardVo;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import board.model.BoardDao;
 
 public class BoardService {
@@ -36,38 +37,26 @@ public class BoardService {
 
 	public void ListBoardService(HttpServletRequest request, HttpServletResponse response) {
 		List<BoardVo> list = dao.listBoard();
-	
-		if(list.size() <= 0) {
+
+		if (list.size() <= 0) {
 			return;
 		}
-		
+
 		JSONArray jsonarr = new JSONArray();
 		jsonarr = JSONArray.fromObject(list);
 		
-		System.out.println(jsonarr.toString());
-		response.setCharacterEncoding("utf-8");
-//		response.getWriter().print(jsonarr.toString());
-
-		PrintWriter pw = null;
-		try {
-			pw = response.getWriter();
-			pw.print(jsonarr.toString());
-			pw.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(pw != null) {				
-				pw.close();
-			}
-		}
+		sendResponse(response, jsonarr);
 
 	}
 
 	public void DetailBoardService(HttpServletRequest request, HttpServletResponse response) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		BoardVo boardDetail = dao.detailBoard(seq);
-
-		request.setAttribute("boardDetail", boardDetail);
+		
+		JSONObject jsonobj = new JSONObject();
+		jsonobj = JSONObject.fromObject(boardDetail);
+		sendResponse(response, jsonobj);
+		// request.setAttribute("boardDetail", boardDetail);
 	}
 
 	public void DeleteBoardService(HttpServletRequest request, HttpServletResponse response) {
@@ -88,19 +77,19 @@ public class BoardService {
 	}
 
 	public static String getBody(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		String requestBody = getBody(request, response);
-//		JSONParser jsonParser = new JSONParser();
-//		JSONObject jsonData = (JSONObject) jsonParser.parse(requestBody);
-//		
-//		String desContents = (String)jsonData.get("desContents");
-//		DescriptionDTO description = new DescriptionDTO();
-//		//설명내용 받아와 셋팅
-//		description.setD_contents(desContents);
-//		//훗날 수정필요 >> 포스트 넘버 받아와 셋팅
-//		description.setP_no(1);
-//		PostDao dao = PostDao.getInstance();
-//		
-//		dao.insertDescription(description);
+		// String requestBody = getBody(request, response);
+		// JSONParser jsonParser = new JSONParser();
+		// JSONObject jsonData = (JSONObject) jsonParser.parse(requestBody);
+		//
+		// String desContents = (String)jsonData.get("desContents");
+		// DescriptionDTO description = new DescriptionDTO();
+		// //설명내용 받아와 셋팅
+		// description.setD_contents(desContents);
+		// //훗날 수정필요 >> 포스트 넘버 받아와 셋팅
+		// description.setP_no(1);
+		// PostDao dao = PostDao.getInstance();
+		//
+		// dao.insertDescription(description);
 
 		String body = "";
 		StringBuilder stringBuilder = new StringBuilder();
@@ -131,5 +120,43 @@ public class BoardService {
 		}
 		body = stringBuilder.toString();
 		return body;
+	}
+	
+	public void sendResponse(HttpServletResponse response, JSONArray jsonarr) {
+		System.out.println(jsonarr.toString());
+		response.setCharacterEncoding("utf-8");
+		// response.getWriter().print(jsonarr.toString());
+
+		PrintWriter pw = null;
+		try {
+			pw = response.getWriter();
+			pw.print(jsonarr.toString());
+			pw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (pw != null) {
+				pw.close();
+			}
+		}
+	}
+	
+	public void sendResponse(HttpServletResponse response, JSONObject jsonobj) {
+		System.out.println(jsonobj.toString());
+		response.setCharacterEncoding("utf-8");
+		// response.getWriter().print(jsonarr.toString());
+
+		PrintWriter pw = null;
+		try {
+			pw = response.getWriter();
+			pw.print(jsonobj.toString());
+			pw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (pw != null) {
+				pw.close();
+			}
+		}
 	}
 }
