@@ -21,7 +21,7 @@ public interface BoardMapper {
 	@Insert("INSERT INTO tbl_board VALUES(board_seq.nextval, #{writer},#{contents},sysdate)")
 	int insertBoard(BoardVo board);
 
-	@Select("SELECT * FROM tbl_board order by seq desc")
+	@Select("select /*+ INDEX_DESC(tbl_board tbl_board_seq_pk)*/ * from tbl_board")
 	List<BoardVo> listBoard();
 
 	@Delete("DELETE FROM tbl_board WHERE seq = #{seq}")

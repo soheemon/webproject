@@ -3,29 +3,41 @@
 
 <script type="text/javascript">
 	$(function() {
+		//1.모달창 열림->true 2.모달창 닫힘->false
 		$('#registerModal').on('show.bs.modal', function(event) {
-//			var button = $(event.relatedTarget) // Button that triggered the modal
-//			var recipient = button.data('whatever') // Extract info from data-* attributes
-//			console.log(recipient);
 
 			var modal = $(this);
-			$('#registerBtn').on('click', function(event) {
+
+			$('#registerBtn').off("click").on('click', function(event) {
+				console.log('event');
 				var contents = modal.find('.form-group textarea').val();
 				var title = modal.find('.form-group input').val();
 				//console.log(contents, title);
 				var board = {
-						'writer':'sohee',
-						'contents':contents
+					'writer' : 'sohee',
+					'contents' : contents
 				};
-				boardService.insertBoard(board, function(){
+				
+				boardService.insertBoard(board, function() {
+					console.log('ajax');
 					$('#registerModal').modal("hide");
+					var contents = modal.find('.form-group textarea').val("");
+					var title = modal.find('.form-group input').val("");
 					printBoardList();
 				});
-			})
-		})
+
+			})//btnClick
+		})//ModalShow
 	})
 </script>
+<script>
+	/**
+	 * 중복서브밋 방지
+	 * 
+	 * @returns {Boolean}
+	 */
 
+</script>
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 	aria-labelledby="registerModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -36,8 +48,8 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h3 class="modal-title" id="registerModal">새글등록</h3>
-
 			</div>
+
 			<div class="modal-body">
 				<form>
 					<div class="form-group">
@@ -50,6 +62,7 @@
 					</div>
 				</form>
 			</div>
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				<button type="button" class="btn btn-primary" id="registerBtn">등록</button>
@@ -57,4 +70,3 @@
 		</div>
 	</div>
 </div>
-
