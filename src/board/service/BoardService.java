@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,15 @@ public class BoardService {
 
 	private BoardService() {};
 
-	public void BoardInsertService(HttpServletRequest request, HttpServletResponse response) {
+	public void BoardInsertService(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 	
 		BoardVo newBoard = new BoardVo();
 		org.json.simple.JSONObject jsonObj = getRequest(request,response);
-		System.out.println(jsonObj);
+		
 		newBoard.setWriter((String) jsonObj.get("writer"));
+		newBoard.setTitle((String) jsonObj.get("title"));
 		newBoard.setContents((String) jsonObj.get("contents"));
+		System.out.println(newBoard.toString());
 		dao.insertBoard(newBoard);
 	}
 
@@ -71,17 +74,21 @@ public class BoardService {
 		// }
 	}
 
-	public void BoardUpdateService(HttpServletRequest request, HttpServletResponse response) {
+	public void BoardUpdateService(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		BoardVo updateBoard = new BoardVo();
-		updateBoard.setWriter(request.getParameter("writer"));
-		updateBoard.setContents(request.getParameter("contents"));
-		updateBoard.setSeq(Integer.parseInt(request.getParameter("seq")));
-		// System.out.println(updateBoard);
+		org.json.simple.JSONObject jsonObj = getRequest(request,response);
+		
+		updateBoard.setWriter((String) jsonObj.get("writer"));
+		updateBoard.setTitle((String) jsonObj.get("title"));
+		updateBoard.setContents((String) jsonObj.get("contents"));
+		updateBoard.setSeq(Integer.parseInt(((String) jsonObj.get("seq"))));
+		
+		System.out.println("update" + updateBoard.toString());
 		dao.boardUpdate(updateBoard);
 	}
 
-	public static org.json.simple.JSONObject getRequest(HttpServletRequest request, HttpServletResponse response) {
-
+	public static org.json.simple.JSONObject getRequest(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		
 		String body = "";
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
@@ -144,6 +151,7 @@ public class BoardService {
 	public void sendResponse(HttpServletResponse response, JSONObject jsonobj) {
 		System.out.println(jsonobj.toString());
 		response.setCharacterEncoding("utf-8");
+		
 		// response.getWriter().print(jsonarr.toString());
 
 		PrintWriter pw = null;

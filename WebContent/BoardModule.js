@@ -10,14 +10,15 @@ var boardService = (function() {
 		getlist: 'BoardList.do',
 		update: 'BoardUpdate.do'
 	};
-	
+
 	function insertBoard(board, callback, error) {
 		console.log("add board.....");
 		$.ajax({
 			type:'post',
 			url: boardControlUrl.insert,
 			data: JSON.stringify(board),
-			contentType:"application/json; charset=utf-8",
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			//datatype: "json",
 			success: function(result, status, xhr){
 				if(callback) {
 					callback(result);

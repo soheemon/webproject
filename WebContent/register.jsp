@@ -9,15 +9,15 @@
 			var modal = $(this);
 
 			$('#registerBtn').off("click").on('click', function(event) {
-				console.log('event');
-				var contents = modal.find('.form-group textarea').val();
-				var title = modal.find('.form-group input').val();
-				//console.log(contents, title);
-				var board = {
-					'writer' : 'sohee',
-					'contents' : contents
-				};
+				var contents = modal.find('#contents').val();
+				var writer = modal.find('#writer').val();
+				var title = modal.find('#title').val();
 				
+				var board = {
+					'writer' : writer,
+					'contents' : contents,
+					'title' : title
+				};
 				boardService.insertBoard(board, function() {
 					console.log('ajax');
 					$('#registerModal').modal("hide");
@@ -36,7 +36,6 @@
 	 * 
 	 * @returns {Boolean}
 	 */
-
 </script>
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 	aria-labelledby="registerModal" aria-hidden="true">
@@ -52,6 +51,11 @@
 
 			<div class="modal-body">
 				<form>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">작성자</label>
+						<input
+							type="text" class="form-control" id="writer">
+					</div>
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">제목</label> <input
 							type="text" class="form-control" id="title">

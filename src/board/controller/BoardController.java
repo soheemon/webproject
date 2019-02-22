@@ -51,6 +51,7 @@ public class BoardController extends HttpServlet {
     }
     
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	
     	request.setCharacterEncoding("utf-8");
     	String ReqUri = getReqUri(request);
     	
@@ -67,6 +68,10 @@ public class BoardController extends HttpServlet {
 		case "BoardDetail.do":
 			System.out.println("BoardDetail");
 			service.DetailBoardService(request, response);
+			break;
+		case "BoardUpdate.do":
+			System.out.println("BoardUpdate");
+			service.BoardUpdateService(request, response);
 			break;
 		default:
 			break;

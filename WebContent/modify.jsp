@@ -40,7 +40,7 @@
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal" data-whatever="@mdo">글수정</button>
 
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="moModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">

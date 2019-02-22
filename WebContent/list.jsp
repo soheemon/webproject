@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,9 +38,7 @@ $(function(){
 				var boardMarkdown = 
 					'<tr data-toggle="modal" data-target="#detailModal"' + 'id=' + board.seq +'>' + 
 						'<td>' + board.seq + '</td>' + 
-						'<td>' + 
-							'defaultTitle' + 			
-						'</td>' + 
+						'<td>' + board.title + '</td>' + 
 						'<td>' + board.writer + '</td>' + 
 						'<td>' + board.regdate + '</td>' + 
 					'</tr>';
@@ -62,13 +59,13 @@ $(function(){
 			<thead>
 				<tr>
 					<th scope="col">글번호
-					</td>
+					</th>
 					<th scope="col">제목
-					</td>
+					</th>
 					<th scope="col">작성자
-					</td>
+					</th>
 					<th scope="col">작성일
-					</td>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
